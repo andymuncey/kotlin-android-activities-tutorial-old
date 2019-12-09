@@ -3,7 +3,6 @@ package com.tinyappco.kotlinhelp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_web_search.*
 import kotlinx.android.synthetic.main.fragment_web.*
@@ -11,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_web.*
 class WebSearchActivity : AppCompatActivity() {
 
 
-    lateinit var webFrag : WebFragment
+    private lateinit var webFrag : WebFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
