@@ -3,13 +3,10 @@ package com.tinyappco.kotlinhelp
 import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.net.URLEncoder
+
 
 class MainActivity : AppCompatActivity(), MainFragment.RequestListener {
 
