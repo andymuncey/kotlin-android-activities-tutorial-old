@@ -24,7 +24,9 @@ class WebSearchActivity : AppCompatActivity() {
         }
 
         webFrag = webFragment as WebFragment
-                webFrag.loadUrl(url)
+        if (url != null) {
+            webFrag.loadUrl(url)
+        }
 
     }
 
