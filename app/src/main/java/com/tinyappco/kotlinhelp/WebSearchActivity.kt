@@ -21,7 +21,7 @@ class WebSearchActivity : AppCompatActivity() {
             url = savedInstanceState.getString("url")
         }
 
-        webView.loadUrl(url)
+        webView.loadUrl(url!!) //should never be null
     }
 
     override fun onBackPressed() {
