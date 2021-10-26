@@ -7,7 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.tinyappco.kotlinhelp.databinding.ActivityMainBinding
 import java.net.URLEncoder
 
 class MainActivity : AppCompatActivity() {
@@ -15,38 +15,42 @@ class MainActivity : AppCompatActivity() {
     private val WEB_BROWSE_REQUEST = 0
     private var prevUrl : String? = null
 
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        btnGoogle.setOnClickListener {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        binding.btnGoogle.setOnClickListener {
             loadWebActivity("https://google.co.uk/search?q=$encodedSearchTerm")
         }
 
-        btnStackOverflow.setOnClickListener {
+        binding.btnStackOverflow.setOnClickListener {
             loadWebActivity("https://stackoverflow.com/search?q=$encodedSearchTerm")
         }
 
-        btnKotlin.setOnClickListener{
+        binding.btnKotlin.setOnClickListener{
             loadWebActivity("https://kotlinlang.org/?q=$encodedSearchTerm&p=0")
         }
 
-        btnAndroid.setOnClickListener{
+        binding.btnAndroid.setOnClickListener{
             loadWebActivity("https://developer.android.com/s/results/?q=$encodedSearchTerm")
         }
 
-        btnPrevious.setOnClickListener {
+        binding.btnPrevious.setOnClickListener {
             loadWebActivity(prevUrl?: "")
         }
 
-        etSearch.addTextChangedListener(object: TextWatcher {
+        binding.etSearch.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) { }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                toggleButtonsState(etSearch.text.length > 1)
+                toggleButtonsState(binding.etSearch.text.length > 1)
             }
         })
 
@@ -54,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val encodedSearchTerm : String
-        get() = URLEncoder.encode(etSearch.text.toString(),"UTF-8")
+        get() = URLEncoder.encode(binding.etSearch.text.toString(),"UTF-8")
 
 
     private fun loadWebActivity(url: String) {
@@ -69,17 +73,17 @@ class MainActivity : AppCompatActivity() {
             val url = data?.getStringExtra("url")
             if (url != null) {
                 prevUrl = url
-                btnPrevious.visibility = View.VISIBLE
+                binding.btnPrevious.visibility = View.VISIBLE
             } else {
-                btnPrevious.visibility = View.INVISIBLE
+                binding.btnPrevious.visibility = View.INVISIBLE
             }
         }
     }
 
     private fun toggleButtonsState(enabled: Boolean){
-        btnAndroid.isEnabled = enabled
-        btnKotlin.isEnabled = enabled
-        btnStackOverflow.isEnabled = enabled
-        btnGoogle.isEnabled = enabled
+        binding.btnAndroid.isEnabled = enabled
+        binding.btnKotlin.isEnabled = enabled
+        binding.btnStackOverflow.isEnabled = enabled
+        binding.btnGoogle.isEnabled = enabled
     }
 }

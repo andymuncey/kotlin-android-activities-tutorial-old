@@ -5,15 +5,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_web_search.*
+import com.tinyappco.kotlinhelp.databinding.ActivityWebSearchBinding
+
 
 class WebSearchActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityWebSearchBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_web_search)
-        webView.webViewClient = WebViewClient() //prevents opening in browser app
-        webView.settings.javaScriptEnabled = true // required for search functionality on Kotlin and Android sites
+
+        binding = ActivityWebSearchBinding.inflate(layoutInflater)
+        val view = binding.root
+
+        setContentView(view)
+        binding.webView.webViewClient = WebViewClient() //prevents opening in browser app
+        binding.webView.settings.javaScriptEnabled = true // required for search functionality on Kotlin and Android sites
 
         var url = intent.getStringExtra("url")
 
@@ -21,12 +28,12 @@ class WebSearchActivity : AppCompatActivity() {
             url = savedInstanceState.getString("url")
         }
 
-        webView.loadUrl(url!!) //should never be null
+        binding.webView.loadUrl(url!!) //should never be null
     }
 
     override fun onBackPressed() {
         val intent = Intent()
-        intent.putExtra("url",webView.url)
+        intent.putExtra("url",binding.webView.url)
         setResult(Activity.RESULT_OK, intent)
         finish()
         super.onBackPressed()
