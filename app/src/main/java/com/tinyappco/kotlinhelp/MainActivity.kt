@@ -6,13 +6,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.tinyappco.kotlinhelp.databinding.ActivityMainBinding
 import java.net.URLEncoder
 
 class MainActivity : AppCompatActivity() {
 
-    private val WEB_BROWSE_REQUEST = 0
+
     private var prevUrl : String? = null
 
     private lateinit var binding: ActivityMainBinding
@@ -60,11 +61,25 @@ class MainActivity : AppCompatActivity() {
     private val encodedSearchTerm : String
         get() = URLEncoder.encode(binding.etSearch.text.toString(),"UTF-8")
 
+    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result ->
+
+        if (result.resultCode == Activity.RESULT_OK) {
+            val url = result.data?.getStringExtra("url")
+            if (url != null) {
+                prevUrl = url
+                binding.btnPrevious.visibility = View.VISIBLE
+            } else {
+                binding.btnPrevious.visibility = View.INVISIBLE
+            }
+        }
+
+    }
 
     private fun loadWebActivity(url: String) {
         val intent = Intent(this, WebSearchActivity::class.java)
         intent.putExtra("url", url)
-        startActivityForResult(intent,WEB_BROWSE_REQUEST)
+        resultLauncher.launch(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
