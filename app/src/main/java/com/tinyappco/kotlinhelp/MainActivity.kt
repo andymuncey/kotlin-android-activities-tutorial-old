@@ -82,18 +82,20 @@ class MainActivity : AppCompatActivity() {
         resultLauncher.launch(intent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            val url = data?.getStringExtra("url")
-            if (url != null) {
-                prevUrl = url
-                binding.btnPrevious.visibility = View.VISIBLE
-            } else {
-                binding.btnPrevious.visibility = View.INVISIBLE
-            }
-        }
-    }
+
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (resultCode == Activity.RESULT_OK) {
+//            val url = data?.getStringExtra("url")
+//            if (url != null) {
+//                prevUrl = url
+//                binding.btnPrevious.visibility = View.VISIBLE
+//            } else {
+//                binding.btnPrevious.visibility = View.INVISIBLE
+//            }
+//        }
+//    }
 
     private fun toggleButtonsState(enabled: Boolean){
         binding.btnAndroid.isEnabled = enabled
