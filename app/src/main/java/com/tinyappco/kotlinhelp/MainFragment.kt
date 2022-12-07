@@ -37,7 +37,7 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(inflater)
         return binding.root
     }
-    
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is MainFragmentRequestListener){

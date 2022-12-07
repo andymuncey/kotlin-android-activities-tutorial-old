@@ -13,9 +13,6 @@ import java.net.URLEncoder
 
 class MainActivity : AppCompatActivity(), MainFragment.MainFragmentRequestListener {
 
-
-//    private var prevUrl : String? = null
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,43 +21,7 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentRequestListen
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-//
-//        binding.btnGoogle.setOnClickListener {
-//            loadWebActivity("https://google.co.uk/search?q=$encodedSearchTerm")
-//        }
-//
-//        binding.btnStackOverflow.setOnClickListener {
-//            loadWebActivity("https://stackoverflow.com/search?q=$encodedSearchTerm")
-//        }
-//
-//        binding.btnKotlin.setOnClickListener{
-//            loadWebActivity("https://kotlinlang.org/?q=$encodedSearchTerm&p=0")
-//        }
-//
-//        binding.btnAndroid.setOnClickListener{
-//            loadWebActivity("https://developer.android.com/s/results/?q=$encodedSearchTerm")
-//        }
-//
-//        binding.btnPrevious.setOnClickListener {
-//            loadWebActivity(prevUrl?: "")
-//        }
-//
-//        binding.etSearch.addTextChangedListener(object: TextWatcher {
-//            override fun afterTextChanged(s: Editable?) { }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                toggleButtonsState(binding.etSearch.text.length > 1)
-//            }
-//        })
-//
-//        toggleButtonsState(false)
     }
-
-//    private val encodedSearchTerm : String
-//        get() = URLEncoder.encode(binding.etSearch.text.toString(),"UTF-8")
-
 
 
     private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -71,15 +32,7 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentRequestListen
 
             val fragment = supportFragmentManager.findFragmentById(R.id.mainFragmentContainerView) as MainFragment
 
-            //todo: find fragment and call updateUrl
             fragment.updatePreviousUrl(url)
-
-//            if (url != null) {
-//                prevUrl = url
-//                binding.btnPrevious.visibility = View.VISIBLE
-//            } else {
-//                binding.btnPrevious.visibility = View.INVISIBLE
-//            }
         }
     }
 
@@ -92,12 +45,6 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentRequestListen
     override fun onUserRequest(url: String) {
         loadWebActivity(url)
     }
+    
 
-
-//    private fun toggleButtonsState(enabled: Boolean){
-//        binding.btnAndroid.isEnabled = enabled
-//        binding.btnKotlin.isEnabled = enabled
-//        binding.btnStackOverflow.isEnabled = enabled
-//        binding.btnGoogle.isEnabled = enabled
-//    }
 }
