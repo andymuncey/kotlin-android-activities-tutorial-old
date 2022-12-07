@@ -41,6 +41,11 @@ class WebSearchFragment : Fragment() {
     }
 
     fun loadUrl(url:String){
+
+        if (this::binding.isInitialized){
+            //do something with binding
+        }
+
         if (this::binding.isInitialized){
             binding.webView.loadUrl(url)
         }
