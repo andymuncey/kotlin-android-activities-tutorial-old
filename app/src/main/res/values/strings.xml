@@ -6,5 +6,7 @@
     <string name="kotlin_docs">Kotlin Docs</string>
     <string name="android_developer">Android Developer</string>
     <string name="stack_overflow">Stack Overflow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
