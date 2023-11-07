@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebViewClient
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.tinyappco.kotlinhelp.databinding.ActivityWebSearchBinding
 
@@ -29,13 +30,19 @@ class WebSearchActivity : AppCompatActivity() {
         }
 
         binding.webView.loadUrl(url!!) //should never be null
+
+        onBackPressedDispatcher.addCallback(this, backPressedCallback)
+
     }
 
-    override fun onBackPressed() {
-        val intent = Intent()
-        intent.putExtra("url",binding.webView.url)
-        setResult(Activity.RESULT_OK, intent)
-        finish()
-        super.onBackPressed()
+    private val backPressedCallback = object: OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            val intent = Intent()
+            intent.putExtra("url",binding.webView.url)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
+
     }
+
 }
